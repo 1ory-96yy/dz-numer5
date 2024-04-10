@@ -13,12 +13,8 @@ public:
     Person() : name(""), age(0) {}
     Person(string name, int age) : name(name), age(age) {}
     Person(const Person& other) : name(other.name), age(other.age) {}
-
-    void getOlder(const Person& other) {
-        if (other.age > this->age) {
-            this->name = other.name;
-            this->age = other.age;
-        }
+    Person getOlder(const Person& other) const {
+        return (other.age > this->age) ? other : *this;
     }
 
     void getInfo() const {
@@ -67,6 +63,10 @@ int main() {
 
     cout << "\nApartment 2 (copied from Apartment 1):" << endl;
     apartment2.getInfo();
+
+    cout << "\nOlder person in Apartment 1:" << endl;
+    Person olderPerson = person1.getOlder(person2);
+    olderPerson.getInfo();
 
     return 0;
 }
